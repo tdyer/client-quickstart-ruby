@@ -6,7 +6,7 @@
       console.log('Token: ' + data.token);
 
       // Setup Twilio.Device
-      Twilio.Device.setup(data.token);
+      Twilio.Device.setup(data.token, {debug: true});
 
       Twilio.Device.ready(function (device) {
         log('Twilio.Device Ready!');
