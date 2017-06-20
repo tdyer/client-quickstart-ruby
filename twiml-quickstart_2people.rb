@@ -3,6 +3,7 @@ require 'twilio-ruby'
 require 'sinatra'
 
 get '/hello-monkey' do
+  puts "/hello-monkey: params = #{params}"
   people = {
     '+19789853901' => 'Tom Dyer',
     '+17868773064' => 'Carina Martinez'
@@ -20,8 +21,10 @@ get '/hello-monkey' do
 end
 
 get '/hello-monkey/handle-gather' do
+  puts "/hello-monkey/handle-gather: params = #{params}"
   redirect '/hello-monkey' unless params['Digits'] == '1'
   Twilio::TwiML::Response.new do |r|
+    puts '/hello-monkey/handle-gather: Dialing +13105551212'
     r.Dial '+13105551212' ### Connect the caller to Koko, or your cell
     r.Say 'The call failed or the remote party hung up. Goodbye.'
   end.text
